@@ -54,7 +54,6 @@ typst watch main.typ            # 保存时自动重新编译
     institution: [四川大学 · 学院或研究所],
     date: datetime(year: 2026, month: 1, day: 1),
   ),
-  logo: image("assets/scu-logo-white-transparent.png", height: 1.45em), // 可选
 )
 
 #title-slide()      // 封面
@@ -67,6 +66,21 @@ typst watch main.typ            # 保存时自动重新编译
 
 #focus-slide[谢谢，欢迎提问]
 ```
+
+### 关于标题栏的校徽
+
+`scu-theme` 的 `logo` 参数**默认就是 `assets/scu-logo-white-transparent.png`**，一般不用写。
+请务必保留这个文件：标题栏右侧那一列的高度会影响整条色带里文字的垂直居中位置，
+如果把它去掉（或换成 `logo: none`），标题会明显上移、顶到上面的导航条。
+
+要换成自己的标识，请保持相近高度：
+
+```typ
+#show: scu-theme.with(
+  logo: image("assets/my-logo.png", height: 1.45em),
+)
+```
+
 
 **核心约定：一级标题 `=` 开启新章节，二级标题 `==` 就是一页幻灯片。**
 

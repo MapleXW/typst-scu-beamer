@@ -11,8 +11,8 @@
 #let c-scu = rgb("#952A1F")
 #let c-scu-dark = rgb("#4A150F")
 #let c-scu-soft = rgb("#F7EFED")
-#let f-body = ((name: "Liberation Sans", covers: "latin-in-cjk"), "KaiTi", "Noto Sans SC")
-#let f-head = ((name: "Liberation Sans", covers: "latin-in-cjk"), "Noto Sans SC")
+#let f-body = ((name: "Liberation Sans", covers: "latin-in-cjk"), "KaiTi", "FangSong_GB2312")
+#let f-head = ((name: "Liberation Sans", covers: "latin-in-cjk"), "Source Han Sans SC")
 
 
 /// Theme color palette. Override any value and pass the result to `scu-theme`.
@@ -35,20 +35,22 @@
 
 /// Theme font families and scale.
 ///
-/// `main` and `heading` are font fallback lists: the first family that exists on
-/// the machine wins the Latin/digit coverage, and the CJK families that follow
-/// supply the Chinese glyphs. `Noto Sans SC` and `KaiTi` are the portable
-/// fallbacks; install `Source Han Sans SC` for the closest match to the original
-/// design. See README.md for per-platform font installation notes.
+/// These tuples are font fallback lists, and their order matters: the first
+/// family that exists on the machine supplies the Latin glyphs, and the CJK
+/// families after it supply the Chinese ones. Because a line's height follows
+/// the metrics of the fallback that actually renders it, reordering these
+/// entries can shift text vertically inside the fixed-height red title band.
+/// The originals are kept first so the design renders as intended; see
+/// README.md for what to install on each platform.
 #let scu-fonts(
   main: (
     (name: "Liberation Sans", covers: "latin-in-cjk"),
     "KaiTi",
-    "Noto Sans SC",
+    "FangSong_GB2312",
   ),
   heading: (
     (name: "Liberation Sans", covers: "latin-in-cjk"),
-    "Noto Sans SC",
+    "Source Han Sans SC",
   ),
   mono: ("Noto Sans Mono", "DejaVu Sans Mono", "Consolas", "Courier New"),
   body-size: 18pt,
@@ -598,16 +600,18 @@
 ///
 /// Pass presentation metadata using Touying's `config-info(...)`.
 ///
-/// The `logo` argument defaults to `none` so that a project only needs an
-/// image file if it actually wants one. For the SCU wordmark, pass
-/// `logo: image("assets/scu-logo-white-transparent.png", height: 1.45em)`.
+/// NOTE: `logo` defaults to the bundled SCU wordmark, and it is not merely
+/// decorative -- the image in the title band's right-hand grid column is what
+/// vertically centers the frame title inside the band. Replacing it with `none`
+/// lets the title drift up against the navigation bar, so keep a logo of
+/// similar height (about 1.45em) or set the band height explicitly.
 #let scu-theme(
   aspect-ratio: "4-3",
   align: top,
   theme-colors: scu-colors(),
   theme-fonts: scu-fonts(),
   display-section-outlines: true,
-  logo: none,
+  logo: image("assets/scu-logo-white-transparent.png", height: 1.45em),
   header-title: self => utils.display-current-heading(depth: self.slide-level),
   ..args,
   body,
