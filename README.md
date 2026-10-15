@@ -7,6 +7,23 @@ A Sichuan University (SCU) presentation theme for Typst, built on Touying 0.7.4.
 
 ![预览](thumbnail.png)
 
+## 效果预览
+
+<table>
+<tr>
+<td width="33%" align="center"><img src="preview/01-cover.png" alt="封面"><br><sub>封面与标题信息</sub></td>
+<td width="33%" align="center"><img src="preview/02-outline.png" alt="目录"><br><sub>自动生成的目录</sub></td>
+<td width="33%" align="center"><img src="preview/04-text.png" alt="文字与列表"><br><sub>文字、圆形列表与红色强调</sub></td>
+</tr>
+<tr>
+<td width="33%" align="center"><img src="preview/07-table.png" alt="表格"><br><sub>红色表头的斑马线表格</sub></td>
+<td width="33%" align="center"><img src="preview/08-code.png" alt="代码块"><br><sub>自动编号的代码块</sub></td>
+<td width="33%" align="center"><img src="preview/15-end.png" alt="结束页"><br><sub>全屏结束页</sub></td>
+</tr>
+</table>
+
+> 以上图片由 `main.typ` 直接渲染生成，可用 `python tools/make-preview.py` 重新生成。
+
 ## 特性
 
 - **smoothbars 导航条**：顶部深红条显示各章节标题与逐页圆点进度，可直接点击跳转
@@ -161,12 +178,24 @@ typst-scu-beamer/
 ├── main.typ                    # 演示示例（可整体替换）
 ├── assets/
 │   ├── scu-logo.png            # 川大校徽（彩色，用于正文插图）
-│   └── scu-logo-white-transparent.png  # 校徽（白色透明，用于红色标题栏）
-├── thumbnail.png               # 仓库预览图
+│   └── scu-logo-white-transparent.png  # 校徽（白色透明，用于红色标题栏，勿删）
+├── preview/                    # README 中展示的页面图片
+├── tools/make-preview.py       # 重新生成 preview/ 与 thumbnail.png
+├── thumbnail.png               # 仓库社交预览图（2x3 拼图）
 ├── .github/workflows/build.yml # 推送 tag 时自动编译并发布 PDF
 ├── LICENSE
 └── README.md
 ```
+
+### 重新生成预览图
+
+```bash
+python tools/make-preview.py                    # 需要 typst 在 PATH 中
+python tools/make-preview.py --typst D:/typst/typst.exe --ppi 200
+```
+
+脚本会把 `main.typ` 的六个代表页面渲染到 `preview/`，并拼成新的 `thumbnail.png`。
+改动过示例内容或主题后重新跑一次即可。
 
 ## 常见问题
 
